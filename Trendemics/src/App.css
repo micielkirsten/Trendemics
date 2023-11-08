@@ -1,0 +1,29 @@
+.welcomeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 50%, #9b23ea 100%);
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+.welcomeTitle {
+  margin-bottom: 20px;
+  font-size: 70px;
+}gi
+
+.welcomeButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.welcomeButton:hover {
+  background-color: #0056b3;
+}
