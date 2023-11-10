@@ -1,3 +1,4 @@
+/* Welcome Styling */
 .welcomeContainer {
   display: flex;
   flex-direction: column;
@@ -11,7 +12,7 @@
 .welcomeTitle {
   margin-bottom: 20px;
   font-size: 70px;
-}gi
+}
 
 .welcomeButton {
   padding: 10px 20px;
@@ -26,4 +27,140 @@
 
 .welcomeButton:hover {
   background-color: #0056b3;
+}
+/* Dashboard Styling */
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 50%, #9b23ea 100%);
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+
+.dashboardNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: transparent;
+}
+
+.logo {
+  font-size: 1.5rem;
+}
+
+.tabButtons button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.tabButtons button:hover {
+  color: #feb47b;
+}
+
+.tabButtons button.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.tabContent {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FilterWindow Styles */
+.filterWindow {
+  display: flex;
+  /* Enables flexbox layout */
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 80vw;
+  max-width: 1000px;
+  /* Adjust as needed */
+  height: auto;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.filterTabs {
+  flex: 1;
+  /* Takes up 1 portion of the space */
+  display: flex;
+  flex-direction: column;
+  /* Aligns tabs vertically */
+  margin-right: 20px;
+  /* Space between tabs and graph */
+}
+
+.filterTabs button {
+  padding: 10px 15px;
+  /* Adjust padding for better control over size */
+  border: none;
+  background: #e0e0e0;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  /* Space between buttons */
+  width: 100%;
+  /* Full width of the parent container */
+  text-align: left;
+  /* Align text to the left */
+}
+
+.filterTabs button:last-child {
+  margin-right: 0;
+  /* Remove margin for the last button */
+}
+
+.filterTabs button.active {
+  background: #007bff;
+  /* Active tab color */
+  color: #fff;
+}
+
+/* Adjust the button styles in the dashboardNav */
+.dashboardNav .tabButtons button {
+  background: transparent;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: #333;
+}
+
+.dashboardNav .tabButtons button.active {
+  color: #007bff;
+  /* Active button color */
+  border-bottom: 2px solid #007bff;
+  /* Underline for active tab */
+}
+
+/* Additional styling for the graphPlaceholder if needed */
+.graphPlaceholder {
+  flex: 3;
+  /* Takes up 3 portions of the space, making it larger */
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 4px;
+  /* Adjust the size as needed */
+  width: 100%;
+  /* Takes the full width of its flex container */
+  height: 400px;
+  /* Adjust height as needed */
 }
