@@ -1,0 +1,139 @@
+/*NEW QUERIES BY COUNTRY*/
+/* 
+1. Monitor the covid vaccine distribution over time, how have the vaccination rates 
+correlated with changes in case rates? 
+*/
+SELECT v_date, AVG(new_vaccine_doses_administered/population) as vaccination_rate
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as vacc_region_id, v_date, new_vaccine_doses_administered
+    FROM "MARINA.TUCKER".vaccinations),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    /*WHERE location = user_country_input*/)
+WHERE vacc_region_id = id
+/*AND location = user_country_input*/
+AND population > 0
+GROUP BY v_date;
+
+SELECT cc_date, AVG(new_confirmed/population) as case_rate
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as covid_region_id, cc_date, new_confirmed
+    FROM "MARINA.TUCKER".covid_cases),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    /*WHERE location = user_country_input*/)
+WHERE covid_region_id = id
+/*AND location = user_country_input*/
+AND population > 0
+GROUP BY c_date;
+
+/* 
+3. Compare and rank different countries or regions based on their pandemic response effectiveness over time, 
+considering factors such as testing rates, vaccination campaigns, and healthcare system resilience. 
+*/
+
+SELECT gr_date, AVG(stringency_index)
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as gr_region_id, stringency_index, gr_date
+    FROM "MARINA.TUCKER".government_responses
+    /*WHERE region_id = user_region_input*/),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    /*WHERE location = user_country_input*/)
+WHERE gr_region_id = id
+/*AND location = user_country_input*/
+AND population > 0
+GROUP BY gr_date;
+
+SELECT cc_date, AVG(new_confirmed/population) as case_rate
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as covid_region_id, cc_date, new_confirmed
+    FROM "MARINA.TUCKER".covid_cases),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    /*WHERE location = user_country_input*/)
+WHERE covid_region_id = id
+/*AND location = user_country_input*/
+AND population > 0
+GROUP BY c_date;
+
+
+/* 
+7. Study the relationship between community mobility patterns (visiting grocery stores, pharmacies, parks, retail/recreational)
+and the emergence of localized COVID-19 outbreaks over time, identifying potential superspreader events. 
+*/
+SELECT mp_date, /*user_mobility_input*/
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as mp_region_id, /*user_mobility_input*/, mp_date
+    FROM "MARINA.TUCKER".mobility),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    /*WHERE location = user_country_input*/)
+WHERE mp_region_id = id
+/*AND location = user_country_input*/
+AND population > 0
+GROUP BY gr_date;
+
+SELECT cc_date, AVG(new_confirmed/population) as case_rate
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as covid_region_id, cc_date, new_confirmed
+    FROM "MARINA.TUCKER".covid_cases),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    /*WHERE location = user_country_input*/)
+WHERE covid_region_id = id
+/*AND location = user_country_input*/
+AND population > 0
+GROUP BY c_date;
+
+/*TESTS*/
+/*1*/
+SELECT v_date, AVG(new_vaccine_doses_administered/population) as vaccination_rate
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as vacc_region_id, v_date, new_vaccine_doses_administered
+    FROM "MARINA.TUCKER".vaccinations),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    WHERE location = 'Austria')
+WHERE vacc_region_id = id
+AND location = 'Austria'
+AND population > 0
+GROUP BY v_date;
+
+SELECT cc_date, AVG(new_confirmed/population) as case_rate
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as covid_region_id, cc_date, new_confirmed
+    FROM "MARINA.TUCKER".covid_cases),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    WHERE location = 'Austria')
+WHERE covid_region_id = id
+AND location = 'Austria'
+AND population > 0
+GROUP BY cc_date;
+
+/*3*/
+SELECT gr_date, AVG(stringency_index)
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as gr_region_id, stringency_index, gr_date
+    FROM "MARINA.TUCKER".government_responses),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    WHERE location = 'Austria')
+WHERE gr_region_id = id
+AND location = 'Austria'
+AND population > 0
+GROUP BY gr_date;
+
+/*7*/
+SELECT mp_date, AVG(grocery_pharmacy)
+FROM "MARINA.TUCKER".populations,
+    (SELECT region_id as mp_region_id, grocery_pharmacy, mp_date
+    FROM "MARINA.TUCKER".mobility),
+    (SELECT id, location
+    FROM "MARINA.TUCKER".regions
+    WHERE location = 'Australia')
+WHERE mp_region_id = id
+AND location = 'Australia'
+GROUP BY mp_date;
+   
