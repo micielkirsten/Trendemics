@@ -57,6 +57,45 @@ WHERE covid_region_id = id
 AND population > 0
 GROUP BY c_date;
 
+/*
+5.1 Analyze longitudinal covid cases based on age 
+to find vulnerable populations and figure out measures to help change the vulnerability over time. 
+*/
+
+SELECT age_case_month, num_age_cases/total_num_cases as case_rate
+FROM
+    (SELECT case_month as age_case_month, COUNT(caseid) as num_age_cases
+    FROM races
+    /*WHERE res_state = user_state_selection*/
+    /*AND age_group = user_age_selection*/
+    GROUP BY case_month
+    ORDER BY case_month asc),
+    (SELECT case_month as total_case_month, COUNT(caseid) as total_num_cases
+    FROM races
+    /*WHERE res_state = user_state_selection*/
+    GROUP BY case_month
+    ORDER BY case_month asc)
+WHERE age_case_month = total_case_month;
+
+/* 
+5.2 Analyze longitudinal covid cases in the United States based on race, sex, and ethnicity
+to find vulnerable populations and figure out measures to help change the vulnerability over time. 
+*/
+
+SELECT race_case_month, num_race_cases/total_num_cases as case_rate
+FROM
+    (SELECT case_month as race_case_month, COUNT(caseid) as num_race_cases
+    FROM races
+    /*WHERE res_state = user_state_selection*/
+    /*AND race = user_race_selection*/
+    GROUP BY case_month
+    ORDER BY case_month asc),
+    (SELECT case_month as total_case_month, COUNT(caseid) as total_num_cases
+    FROM races
+    /*WHERE res_state = user_state_selection*/
+    GROUP BY case_month
+    ORDER BY case_month asc)
+WHERE race_case_month = total_case_month;
 
 /* 
 7. Study the relationship between community mobility patterns (visiting grocery stores, pharmacies, parks, retail/recreational)
@@ -124,6 +163,38 @@ WHERE gr_region_id = id
 AND location = 'Austria'
 AND population > 0
 GROUP BY gr_date;
+
+/*5.1*/
+SELECT age_case_month, num_age_cases/total_num_cases as case_rate
+FROM
+    (SELECT case_month as age_case_month, COUNT(caseid) as num_age_cases
+    FROM races
+    WHERE res_state = 'NC'
+    AND age_group = '65+ years'
+    GROUP BY case_month
+    ORDER BY case_month asc),
+    (SELECT case_month as total_case_month, COUNT(caseid) as total_num_cases
+    FROM races
+    WHERE res_state = 'NC'
+    GROUP BY case_month
+    ORDER BY case_month asc)
+WHERE age_case_month = total_case_month;
+
+/*5.2*/
+SELECT race_case_month, num_race_cases/total_num_cases as case_rate
+FROM
+    (SELECT case_month as race_case_month, COUNT(caseid) as num_race_cases
+    FROM races
+    WHERE res_state = 'NC'
+    AND race = 'White'
+    GROUP BY case_month
+    ORDER BY case_month asc),
+    (SELECT case_month as total_case_month, COUNT(caseid) as total_num_cases
+    FROM races
+    WHERE res_state = 'NC'
+    GROUP BY case_month
+    ORDER BY case_month asc)
+WHERE race_case_month = total_case_month;
 
 /*7*/
 SELECT mp_date, AVG(grocery_pharmacy)
