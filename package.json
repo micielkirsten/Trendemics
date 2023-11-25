@@ -4,6 +4,13 @@
     "@types/node": "^20.9.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@vx/axis": "^0.0.199",
+    "@vx/gradient": "^0.0.199",
+    "@vx/group": "^0.0.199",
+    "@vx/mock-data": "^0.0.199",
+    "@vx/scale": "^0.0.199",
+    "@vx/shape": "^0.0.199",
+    "d3-array": "^3.2.4",
     "typescript": "^5.2.2"
   },
   "devDependencies": {

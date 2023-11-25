@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FilterWindow from '../Pages/Components/FilterWindow.tsx'; // Adjust the import path as necessary
+import FilterWindow from '../Pages/Components/FilterWindow'; // Adjust the import path as necessary
 import '../App.css'; // Make sure this path is correct
 
 const Dashboard = () => {
@@ -15,10 +15,10 @@ const Dashboard = () => {
             <nav className="dashboardNav">
                 <div className="logo">Trendemics</div>
                 <div className="tabButtons">
-                    <button className={activeTab === 0 ? 'active' : ''} onClick={() => handleTabClick(0)}>Worldwide</button>
-                    <button className={activeTab === 1 ? 'active' : ''} onClick={() => handleTabClick(1)}>Map Display</button>
-                    <button className={activeTab === 2 ? 'active' : ''} onClick={() => handleTabClick(2)}>Multi-Country Average</button>
-                    <button className={activeTab === 3 ? 'active' : ''} onClick={() => handleTabClick(3)}>Multi-Country Compare</button>
+                    <button className={activeTab === 0 ? 'active' : ''} onClick={() => {handleTabClick(0); setShowFilter(true);}}>Worldwide</button>
+                    <button className={activeTab === 1 ? 'active' : ''} onClick={() => {handleTabClick(1); setShowFilter(true);}}>Map Display</button>
+                    <button className={activeTab === 2 ? 'active' : ''} onClick={() => {handleTabClick(2); setShowFilter(true);}}>Multi-Country Average</button>
+                    <button className={activeTab === 3 ? 'active' : ''} onClick={() => {handleTabClick(3); setShowFilter(true);}}>Multi-Country Compare</button>
                 </div>
             </nav>
             <div className="tabContent">
