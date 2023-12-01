@@ -1,3 +1,12 @@
+const { DataTypes, sequelize } = require('sequelize')
+require('dotenv').config();
+require('dotenv/config');
+
+//const sequelize = new Sequelize('UF CISE Oracle', DB_USER, DB_PW, {
+//  host: 'oracle.cise.ufl.edu:1521',
+//  dialect: 'orcl',
+//});
+
 const Region = sequelize.define('Region', {
   ID: {
     type: DataTypes.STRING, // Represents a string
@@ -14,7 +23,7 @@ const Region = sequelize.define('Region', {
   }
 }, {
   timestamps: false, // Set to false if you don't want timestamps (created_at, updated_at)
-  tableName: 'regions' // Replace 'regions' with your actual table name in the database
+  tableName: 'REGIONS' // Replace 'regions' with your actual table name in the database
 });
 
 module.exports = Region;
