@@ -21,9 +21,62 @@ FROM
     (SELECT COUNT(*) as races_count
     FROM races)
 ;
+/*SAMPLE OF REWRITTEN QUERY 1 WITH TEST*/
+
+SELECT v_date, (vaccination_rate/case_rate) as vaccine_correlation_factor
+FROM
+    (SELECT v_date, AVG(new_vaccine_doses_administered/population) as vaccination_rate
+    FROM "MARINA.TUCKER".populations,
+        (SELECT region_id as vacc_region_id, v_date, new_vaccine_doses_administered
+        FROM "MARINA.TUCKER".vaccinations),
+        (SELECT id, location
+        FROM "MARINA.TUCKER".regions
+        /*WHERE location = user_country_input*/)
+    WHERE vacc_region_id = id
+    /*AND location = user_country_input*/
+    AND population > 0
+    GROUP BY v_date),
+    (SELECT cc_date, AVG(new_confirmed/population) as case_rate
+    FROM "MARINA.TUCKER".populations,
+        (SELECT region_id as covid_region_id, cc_date, new_confirmed
+        FROM "MARINA.TUCKER".covid_cases),
+        (SELECT id, location
+        FROM "MARINA.TUCKER".regions
+        /*WHERE location = user_country_input*/)
+    WHERE covid_region_id = id
+    /*AND location = user_country_input*/
+    AND population > 0
+    GROUP BY cc_date)
+WHERE v_date = cc_date;
+ /*TEST*/
+SELECT v_date, (vaccination_rate/case_rate) as vaccine_correlation_factor
+FROM
+    (SELECT v_date, AVG(new_vaccine_doses_administered/population) as vaccination_rate
+    FROM "MARINA.TUCKER".populations,
+        (SELECT region_id as vacc_region_id, v_date, new_vaccine_doses_administered
+        FROM "MARINA.TUCKER".vaccinations),
+        (SELECT id, location
+        FROM "MARINA.TUCKER".regions
+        WHERE location = 'Austria')
+    WHERE vacc_region_id = id
+    AND location = 'Austria'
+    AND population > 0
+    GROUP BY v_date),
+    (SELECT cc_date, AVG(new_confirmed/population) as case_rate
+    FROM "MARINA.TUCKER".populations,
+        (SELECT region_id as covid_region_id, cc_date, new_confirmed
+        FROM "MARINA.TUCKER".covid_cases),
+        (SELECT id, location
+        FROM "MARINA.TUCKER".regions
+        WHERE location = 'Austria')
+    WHERE covid_region_id = id
+    AND location = 'Austria'
+    AND population > 0
+    GROUP BY cc_date)
+WHERE v_date = cc_date;
 
 
-/*NEW QUERIES BY COUNTRY*/
+/*QUERIES BY COUNTRY*/
 /* 
 1. Monitor the covid vaccine distribution over time, how have the vaccination rates 
 correlated with changes in case rates? 
