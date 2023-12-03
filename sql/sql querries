@@ -1,3 +1,28 @@
+/* Main page query to count number of tuples 
+Should = 9937889 */
+SELECT (covid_cases_count + economies_count + government_responses_count + populations_count + mobility_count + public_health_count + regions_count + vaccinations_count + races_count) as total_count
+FROM
+    (SELECT COUNT(*) as covid_cases_count
+    FROM "MARINA.TUCKER".covid_cases),
+    (SELECT COUNT(*) as economies_count
+    FROM "MARINA.TUCKER".economies),
+    (SELECT COUNT(*) as government_responses_count
+    FROM "MARINA.TUCKER".government_responses),
+    (SELECT COUNT(*) as populations_count
+    FROM "MARINA.TUCKER".populations),
+    (SELECT COUNT(*) as mobility_count
+    FROM "MARINA.TUCKER".mobility),
+    (SELECT COUNT(*) as public_health_count
+    FROM "MARINA.TUCKER".public_health),
+    (SELECT COUNT(*) as regions_count
+    FROM "MARINA.TUCKER".regions),
+    (SELECT COUNT(*) as vaccinations_count
+    FROM "MARINA.TUCKER".vaccinations),
+    (SELECT COUNT(*) as races_count
+    FROM races)
+;
+
+
 /*NEW QUERIES BY COUNTRY*/
 /* 
 1. Monitor the covid vaccine distribution over time, how have the vaccination rates 
