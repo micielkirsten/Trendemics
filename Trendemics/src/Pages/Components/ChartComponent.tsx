@@ -8,7 +8,7 @@ const ChartComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:4000/get');
+        const response = await fetch('http://localhost:4000/get/vaccines');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -46,9 +46,9 @@ const ChartComponent = () => {
           <YAxis />
           <Tooltip labelFormatter={(label) => new Date(label).toLocaleDateString('en-GB')} />
           <Legend payload={[
-              { value: 'New accine doses administered', type: 'line', id: 'value' }, // Customize the legend name here
+              { value: 'New Vaccine doses administered', type: 'line', id: 'value' }, // Customize the legend name here
             ]} />
-          <Line type="monotone" dataKey="value" stroke="#8884d8" name='New accine doses administered' />
+          <Line type="monotone" dataKey="value" stroke="#8884d8" name='New Vaccine doses administered' />
           <Brush
             dataKey="date" tickFormatter={(tick) => new Date(tick).toLocaleDateString('default', { month: 'short' , year: 'numeric'})}
             height={30}

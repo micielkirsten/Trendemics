@@ -13,7 +13,7 @@ const Dashboard = () => {
     return (
         <div className="dashboardContainer">
             <nav className="dashboardNav">
-                <div className="logo">Trendemics</div>
+            <a href="http://localhost:3000" className="logo">Trendemics</a>
                 <div className="tabButtons">
                     <button className={activeTab === 0 ? 'active' : ''} onClick={() => {handleTabClick(0); setShowFilter(true);}}>Worldwide</button>
                     <button className={activeTab === 1 ? 'active' : ''} onClick={() => {handleTabClick(1); setShowFilter(true);}}>Map Display</button>
@@ -22,10 +22,12 @@ const Dashboard = () => {
                 </div>
             </nav>
             <div className="tabContent">
-                {activeTab === 0 && <p> {showFilter && <FilterWindow onClose={() => setShowFilter(false)} />}</p>}
-                {activeTab === 1 && <p> {showFilter && <FilterWindow onClose={() => setShowFilter(false)} />}</p>}
-                {activeTab === 2 && <p>{showFilter && <FilterWindow onClose={() => setShowFilter(false)} />}</p>}
-                {activeTab === 3 && <p> {showFilter && <FilterWindow onClose={() => setShowFilter(false)} />}</p>}
+                {activeTab === 0 && <p> {showFilter && <FilterWindow onClose={() => setShowFilter(false)} filterType="Worldwide" />}</p>}
+                {activeTab === 1 && <p> {showFilter && <FilterWindow onClose={() => setShowFilter(false)} filterType="Map Display" />}</p>}
+                {activeTab === 2 && <p>{showFilter && <FilterWindow onClose={() => setShowFilter(false)} filterType ="Average"/>}</p>}
+                {activeTab === 3 && <p> {showFilter && <FilterWindow onClose={() => setShowFilter(false)} filterType ="Compare" />}</p>}
+                <p>Click on any of the links above.</p>
+            
             </div>
            
         </div>

@@ -55,6 +55,19 @@ correlated with changes in case rates?
     WHERE vacc_region_id = id and rownum <= 100
     AND location = 'Austria'
     AND population > 0
-    GROUP BY v_date;`
+    GROUP BY v_date`,
+
+    VAR_TEST:
+    `SELECT v_date, AVG(new_vaccine_doses_administered/population) as vaccination_rate
+    FROM populations,
+        (SELECT region_id as vacc_region_id, v_date, new_vaccine_doses_administered
+        FROM vaccinations
+        WHERE v_date >= '01-JAN-20' AND v_date < '01-JAN-22'),
+        (SELECT id, location
+        FROM regions
+        WHERE location = :val)
+    WHERE vacc_region_id = id AND ROWNUM <= 1000
+    AND population > 0
+    GROUP BY v_date`,
 }
 module.exports = QUERIES;
