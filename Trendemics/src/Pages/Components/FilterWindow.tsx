@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ChartComponent  from './ChartComponent';
-import GetCountries from './GetCountries';
+import  GetCountries, { useAppContext } from './GetCountries';
 
 
 
@@ -13,6 +13,9 @@ interface FilterWindowProps {
 const FilterWindow: React.FC<FilterWindowProps> = ({ onClose }) => {
   const [filter, setFilter] = useState("");
   const [activeTab, setActiveTab] = useState(0);
+
+  //FIXME?
+  const selectedValue = useAppContext();
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value);
@@ -37,8 +40,8 @@ return (
     </div>
     <div className="dropdown-menu"></div>
     <div className="graphPlaceholder">
-    <ChartComponent />
-      <p>Graph will be displayed here</p>
+    <ChartComponent selectedValue={selectedValue}/>
+      <p></p>
     </div>
   </div>
   

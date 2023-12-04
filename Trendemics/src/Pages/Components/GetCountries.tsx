@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
+
+let AppContext = createContext('Austria');//FIXME?
 
 const GetCountries = () => {
   const [menuOptions, setMenuOptions] = useState([]);
@@ -28,15 +30,18 @@ const GetCountries = () => {
   const handleDropdownChange = (event) => {
     const selectedValue = event.target.value;
     setSelectedValue(selectedValue);
+    AppContext = createContext(selectedValue);//FIXME?
 
     // Call the function to make the API request with the selected option
-    makeApiRequest(selectedValue);
+   // makeApiRequest(selectedValue);
   };
 
   const makeApiRequest = async (selectedValue) => {
     try {
+      console.log(`http://localhost:4000/${encodeURIComponent(selectedValue)}`);
       const response = await fetch(`http://localhost:4000/${encodeURIComponent(selectedValue)}`);
 
+      console.log("response",response.status);
       if (response.ok) {
         const data = await response.json();
         // Process the response data as needed
@@ -66,7 +71,14 @@ const GetCountries = () => {
         <p>You selected: {selectedValue}</p>
       )}
     </div>
+    
   );
 };
 
+//FIXME??
 export default GetCountries;
+export const useAppContext = () => {
+  return useContext(AppContext);
+};
+
+

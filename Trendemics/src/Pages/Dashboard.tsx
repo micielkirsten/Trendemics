@@ -26,7 +26,7 @@ const Dashboard = () => {
                 {activeTab === 1 && <p> {showFilter && <FilterWindow onClose={() => setShowFilter(false)} filterType="Map Display" />}</p>}
                 {activeTab === 2 && <p>{showFilter && <FilterWindow onClose={() => setShowFilter(false)} filterType ="Average"/>}</p>}
                 {activeTab === 3 && <p> {showFilter && <FilterWindow onClose={() => setShowFilter(false)} filterType ="Compare" />}</p>}
-                <p>Click on any of the links above.</p>
+                <p></p>
             
             </div>
            
