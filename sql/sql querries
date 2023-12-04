@@ -189,7 +189,7 @@ FROM "MARINA.TUCKER".populations,
 WHERE mp_region_id = id
 /*AND location = user_country_input*/
 AND population > 0
-GROUP BY gr_date;
+GROUP BY mp_date;
 
 SELECT cc_date, AVG(new_confirmed/population) as case_rate
 FROM "MARINA.TUCKER".populations,
