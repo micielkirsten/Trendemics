@@ -34,11 +34,11 @@ This data is specific to the United States.
 Please select the state and race you are interested in to get started.
 
 Query 7 Page
-Here, we visualize the mobility patterns in a given country compared to COVID case rate of that country, displayed over time. 
+Here, we visualize the changes in mobility patterns in a given country compared to COVID case rate of that country, displayed over time. 
 Mobility patterns are available for transit stations, residential, workplaces, parks, grocery/pharmacy, and retail/recreation. 
 Dates are measured on the x axis and the correlation factor is displayed on the y axis. 
 If the correlation value is close to 0, the mobility pattern rate and covid case rate are very similar.
-If the correlation value is between 0 and 1, the mobility pattern rate is higher than the vaccine rate.
-If the correlation value is greater than 1, the mobility pattern rate is higher than the case rate.
+If the correlation value is negative, this mobility pattern rate has decreased since the previous measurement.
+If the correlation value is positive, this mobility pattern rate has increased since the previous measurement.
 
 Please select the country and mobility pattern you are interested in to get started.
