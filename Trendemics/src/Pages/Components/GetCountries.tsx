@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
 
-let AppContext = createContext('Austria');//FIXME?
+let AppContext = createContext('');//FIXME?
 
 const GetCountries = () => {
   const [menuOptions, setMenuOptions] = useState([]);
@@ -57,7 +57,7 @@ const GetCountries = () => {
 
   return (
     <div>
-      <label htmlFor="myDropdown">Choose an option:</label>
+      <label htmlFor="myDropdown">Choose a country:</label>
       <select id="myDropdown" value={selectedValue} onChange={handleDropdownChange} style={{ width: '130px' }}>
       <option value="">Select a country</option>
         {menuOptions.map((option, index) => (

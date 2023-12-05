@@ -86,18 +86,20 @@ app.get('/:country', async (req,res)=>{
     const country = req.params.country;
     //const country = (req.params.country.charAt(0).toUpperCase() + req.params.country.substr(1).toLowerCase());
     console.log(country);
+    console.log("\N","EXECUTING QUERY 1", "\N")
 
-    const sql = QUERIES.VAR_TEST;
+    const sql = QUERIES.QUERY_1;
     if (db) {
         try {
             //res.setHeader('Timeout', '20');
             console.log(sql);
             //co/nst result = await db.execute(sql, [`01-JAN-21`, `01-JAN-22`, `Austria`],
             
-            const q = await db.execute(sql ,[country], 
+            const q = await db.execute(sql ,[country, country, country, country], 
                 //{outFormat: oracledb.OBJECT},
                 (err, result)=>{
                console.log(result);
+               console.log("ERR",err);
                 
                     res.send(JSON.stringify(result.rows, null, 2))
                       
@@ -107,7 +109,7 @@ app.get('/:country', async (req,res)=>{
             });
             //res.send(JSON.stringify(result.rows, null, 2))
         } catch (err) {
-        console.log(err.message); 
+        console.log("ERROR",err.message); 
         } 
     } else {
         console.log('Error: DB connection lost')
@@ -173,12 +175,50 @@ app.get('/get/vaccines', async (req,res)=>{
 
 })
 
+//query 2
+app.get('/government/:country', async (req,res)=>{
+    //formatting request to title case
+    const country = req.params.country;
+    //const country = (req.params.country.charAt(0).toUpperCase() + req.params.country.substr(1).toLowerCase());
+    console.log(country);
+    console.log("\N","EXECUTING QUERY 2", "\N")
+
+    const sql = QUERIES.QUERY_2;
+    if (db) {
+        try {
+            //res.setHeader('Timeout', '20');
+            console.log(sql);
+            //co/nst result = await db.execute(sql, [`01-JAN-21`, `01-JAN-22`, `Austria`],
+            
+            const q = await db.execute(sql ,[country, country],
+                //{outFormat: oracledb.OBJECT},
+                (err, result)=>{
+               console.log(result);
+               console.log("ERR",err);
+                
+                    res.send(JSON.stringify(result.rows, null, 2))
+                      
+                        //JSON.stringify(result.rows, null, 2))
+                   // res.send(result)
+                
+            });
+            //res.send(JSON.stringify(result.rows, null, 2))
+        } catch (err) {
+        console.log("ERROR",err.message); 
+        } 
+    } else {
+        console.log('Error: DB connection lost')
+    }
+
+})
+
 //query 3
 app.get('/usage/:state/:age', async (req,res)=>{
     //formatting request to title case
     const state = req.params.state;
     const age = req.params.age;
     //const country = (req.params.country.charAt(0).toUpperCase() + req.params.country.substr(1).toLowerCase());
+    console.log("\N","EXECUTING QUERY 3", "\N")
     console.log("STATE: " + state, "AGE: " + age);
 
     const sql = QUERIES.QUERY_3;
@@ -188,7 +228,7 @@ app.get('/usage/:state/:age', async (req,res)=>{
             console.log(sql);
             //co/nst result = await db.execute(sql, [`01-JAN-21`, `01-JAN-22`, `Austria`],
             
-            const q = await db.execute(sql ,[age, state], 
+            const q = await db.execute(sql ,[state, age, state], 
                 //{outFormat: oracledb.OBJECT},
                 (err, result)=>{
                console.log(result);
@@ -215,6 +255,7 @@ app.get('/usrace/:state/:race', async (req,res)=>{
     const state = req.params.state;
     const race = req.params.race;
     //const country = (req.params.country.charAt(0).toUpperCase() + req.params.country.substr(1).toLowerCase());
+    console.log("\N","EXECUTING QUERY 4", "\N")
     console.log("STATE: " + state, "RACE: " + race);
 
     const sql = QUERIES.QUERY_4;
@@ -224,7 +265,7 @@ app.get('/usrace/:state/:race', async (req,res)=>{
             console.log(sql);
             //const result = await db.execute(sql, [`01-JAN-21`, `01-JAN-22`, `Austria`],
             
-            const q = await db.execute(sql ,[race, state], 
+            const q = await db.execute(sql ,[state, race, state], 
                 //{outFormat: oracledb.OBJECT},
                 (err, result)=>{
                console.log(result);
@@ -246,12 +287,13 @@ app.get('/usrace/:state/:race', async (req,res)=>{
 })
 
 //query 5 - ADD :pattern' to route when implemented
-app.get('/mobility/:country/', async (req,res)=>{
+app.get('/mobility/:country', async (req,res)=>{
     //formatting request to title case
     const country = req.params.country;
     const pattern = req.params.pattern;
     //const country = (req.params.country.charAt(0).toUpperCase() + req.params.country.substr(1).toLowerCase());
     console.log(country);
+    console.log("\nEXECUTING QUERY 5\n");
 
     const sql = QUERIES.QUERY_5;
     if (db) {
@@ -260,7 +302,7 @@ app.get('/mobility/:country/', async (req,res)=>{
             console.log(sql);
             //co/nst result = await db.execute(sql, [`01-JAN-21`, `01-JAN-22`, `Austria`],
             
-            const q = await db.execute(sql ,[country], 
+            const q = await db.execute(sql ,[pattern, pattern, country, country], 
                 //{outFormat: oracledb.OBJECT},
                 (err, result)=>{
                console.log(result);
@@ -284,7 +326,7 @@ app.get('/mobility/:country/', async (req,res)=>{
 //countries menu
 app.get('/get/countries', async (req,res)=>{
 
-    const sql = `SELECT UNIQUE location FROM "MARINA.TUCKER".REGIONS ORDER BY location ASC`;
+    const sql = `SELECT UNIQUE location FROM REGIONS ORDER BY location ASC`;
     if (db) {
         try {
             //res.setHeader('Timeout', '20');
@@ -314,3 +356,130 @@ app.get('/get/countries', async (req,res)=>{
 
 })
 
+app.get('/get/ages', async (req,res)=>{
+
+    const sql = QUERIES.GET_AGES;
+    if (db) {
+        try {
+            //res.setHeader('Timeout', '20');
+            console.log(sql);
+            const result = await db.execute(sql, [], // no binds
+            {
+              outFormat: oracledb.LIST
+            });
+            //const q = await db.execute(sql , (err, result)=>{
+                //console.log(q);
+                
+                   res.send(JSON.stringify(result.rows, null, 2))
+                      
+                        //JSON.stringify(result.rows, null, 2))
+                    //    console.log("result: " +    result);
+                   // res.send(result)
+                
+            //});
+        } catch (err) {
+        console.log(err.message); 
+        } 
+    } else {
+        console.log('Error: DB connection lost')
+    }
+
+    //db.close();
+
+})
+
+app.get('/get/states', async (req,res)=>{
+
+    const sql = QUERIES.GET_STATES;
+    if (db) {
+        try {
+            //res.setHeader('Timeout', '20');
+            console.log(sql);
+            const result = await db.execute(sql, [], // no binds
+            {
+              outFormat: oracledb.LIST
+            });
+            //const q = await db.execute(sql , (err, result)=>{
+                //console.log(q);
+                
+                   res.send(JSON.stringify(result.rows, null, 2))
+                      
+                        //JSON.stringify(result.rows, null, 2))
+                    //    console.log("result: " +    result);
+                   // res.send(result)
+                
+            //});
+        } catch (err) {
+        console.log(err.message); 
+        } 
+    } else {
+        console.log('Error: DB connection lost')
+    }
+
+    //db.close();
+
+})
+
+app.get('/get/races', async (req,res)=>{
+
+    const sql = QUERIES.GET_RACES;
+    if (db) {
+        try {
+            //res.setHeader('Timeout', '20');
+            console.log(sql);
+            const result = await db.execute(sql, [], // no binds
+            {
+              outFormat: oracledb.LIST
+            });
+            //const q = await db.execute(sql , (err, result)=>{
+                //console.log(q);
+                
+                   res.send(JSON.stringify(result.rows, null, 2))
+                      
+                        //JSON.stringify(result.rows, null, 2))
+                    //    console.log("result: " +    result);
+                   // res.send(result)
+                
+            //});
+        } catch (err) {
+        console.log(err.message); 
+        } 
+    } else {
+        console.log('Error: DB connection lost')
+    }
+
+    //db.close();
+
+})
+
+app.get('/get/mobility', async (req,res)=>{
+
+    //const sql = QUERIES.GET_MOBILITY;
+    if (db) {
+        try {
+            //res.setHeader('Timeout', '20');
+           // console.log(sql);
+            //const result = await db.execute(sql, [], // no binds
+            //{
+            //  outFormat: oracledb.LIST
+            //});
+            //const q = await db.execute(sql , (err, result)=> {
+                //console.log(q);
+                result = [`TRANSIT_STATIONS`, `GROCERY_PHARMACY`, `PARKS`, `RESIDENTIAL`, `RETAIL_RECREATION`, `WORKPLACES`];
+                   res.send(JSON.stringify(result.rows, null, 2))
+                      
+                        //JSON.stringify(result.rows, null, 2))
+                    //    console.log("result: " +    result);
+                   // res.send(result)
+                
+            //});
+        } catch (err) {
+        console.log(err.message); 
+        } 
+    } else {
+        console.log('Error: DB connection lost')
+    }
+
+    //db.close();
+
+})
