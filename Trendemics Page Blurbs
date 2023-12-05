@@ -25,12 +25,18 @@ Please select the country you are interested in to get started.
 
 Query 5.1 Page
 Here, we visualize the incidence of COVID cases among people of a certain age group as a factor of total COVID cases among all age groups. 
-This data is specific to the United States. 
+This data is specific to the United States.
+Months are measured on the x axis and the case rate is displayed on the y axis.
+If the case rate is close to 0, a small percent of total cases occured in the specified age group.
+If the case rate is close to 100, a large percent of total cases occured in the specified age group.
 Please select the state and age group you are interested in to get started.
 
 Query 5.2 Page
 Here, we visualize the incidence of COVID cases among people of a certain race as a factor of total COVID cases among all races. 
 This data is specific to the United States. 
+Months are measured on the x axis and the case rate is displayed on the y axis.
+If the case rate is close to 0, a small percent of total cases occured in the specified race.
+If the case rate is close to 100, a large percent of total cases occured in the specified race.
 Please select the state and race you are interested in to get started.
 
 Query 7 Page
@@ -40,5 +46,7 @@ Dates are measured on the x axis and the correlation factor is displayed on the 
 If the correlation value is close to 0, the mobility pattern rate and covid case rate are very similar.
 If the correlation value is negative, this mobility pattern rate has decreased since the previous measurement.
 If the correlation value is positive, this mobility pattern rate has increased since the previous measurement.
+So, if you see a large positive value, this would represent a larger increase in mobility with a smaller instance of covid cases.
+Conversely, if you see a large negative value, this would represent a larger decrease in mobility with a smaller instance of covid cases.
 
 Please select the country and mobility pattern you are interested in to get started.
